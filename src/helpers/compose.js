@@ -1,3 +1,5 @@
+/* @flow */
+
 export default function compose<X>(...funcs: Array<Function>) {
   if (funcs.length === 0) {
     return (arg: any) => arg;

@@ -1,15 +1,16 @@
 {
-  "name": "kyngraph",
+  "name": "kyntools",
   "version": "0.0.1",
-  "main": "./lib/src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
+    "compile": "babel ./src --out-dir ./dist",
     "lint": "eslint ./src --ignore-pattern **/*.min.js  --ext .js --ext .jsx",
     "lintfix": "npm run lint -- --fix",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "test": "mocha --watch --compilers js:babel-core/register",
-    "compile": "tsc"
+    "test": "mocha --watch --compilers js:babel-core/register"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "6.x.x",
     "babel-eslint": "^7.1.0",
     "babel-plugin-react-require": "2.x.x",
@@ -24,8 +25,7 @@
     "eslint-plugin-flowtype": "^2.25.0",
     "eslint-plugin-react": "^3.15.0",
     "flow-bin": "^0.32.0",
-    "mocha": "2.x.x",
-    "typescript": "^2.0.7"
+    "mocha": "2.x.x"
   },
   "private": true
 }
