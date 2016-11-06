@@ -1,0 +1,14 @@
+[libs]
+
+[ignore]
+.*/node_modules/fbjs/.*
+.*/node_modules/config-chain/test/broken.json
+.*/node_modules/npmconf/test/.*
+.*/node_modules/editions/.*
+.*/node_modules/widgets/.*
+
+[include]
+lib/
+
+[options]
+module.name_mapper='^\/\(.*\)$' -> '<PROJECT_ROOT>/\1'
