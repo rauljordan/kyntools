@@ -1,8 +1,9 @@
 import Identity from './identity';
-import { Some, None } from './maybe';
+import { Maybe, Some, None } from './maybe';
 
 export default {
   Identity,
+  Maybe,
   Some,
   None
 };

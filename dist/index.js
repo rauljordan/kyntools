@@ -14,6 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   Identity: _identity2.default,
+  Maybe: _maybe.Maybe,
   Some: _maybe.Some,
   None: _maybe.None
 };
