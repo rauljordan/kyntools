@@ -26,6 +26,5 @@
     "eslint-plugin-react": "^3.15.0",
     "flow-bin": "^0.32.0",
     "mocha": "2.x.x"
-  },
-  "private": true
+  }
 }
