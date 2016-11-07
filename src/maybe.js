@@ -4,28 +4,46 @@ import type {
   Monad
 } from './types';
 
-class Maybe<T> {
+export class Maybe<T> {
   val: T
   constructor(val: T) {
     this.val = val;
   }
-  flatMap<Maybe>(f: (t: T) => Monad<Maybe>): Monad<Maybe> {
-    return f(this.val);
+  static fromNull(val: T): Maybe<?T> {
+    return val ? new Maybe(val) : new Maybe(null);
   }
-  map<U>(f: (t: T) => U): Maybe<U> {
-    return new Maybe(f(this.val));
+  flatMap<Maybe>(f: (t: T) => Monad<Maybe>): ?Monad<Maybe> {
+    return this.val ? f(this.val) : null;
   }
-  ap<U>(f: Maybe<(val: T) => U>): Maybe<U> {
-    return new Maybe(f.get()(this.val));
+  map<U>(f: (t: T) => U): Maybe<?U> {
+    return this.val ? new Maybe(f(this.val)) : new Maybe(null);
+  }
+  ap<U>(f: Maybe<(val: T) => U>): ?Maybe<U> {
+    if (this.isSome()) {
+      return new Maybe(f.getOrElse((arg: any) => arg)(this.val));
+    }
+    return null;
+  }
+  catamorphism<Z>(none: () => Z, some: (val: T) => Z): Z {
+    return this.isSome() ? some(this.val) : none();
+  }
+  filter(f: (t: T) => boolean): Maybe<?T> {
+    if (!this.val) {
+      return new Maybe(null);
+    }
+    return f(this.val) ? new Maybe(this.val) : new Maybe(null);
+  }
+  isSome(): boolean {
+    return this.val ? true : false;
+  }
+  isNone(): boolean {
+    return !this.val ? true : false;
   }
   getOrElse(other: T): T {
     return this.val ? this.val : other;
   }
   orElse(other: Maybe<T>): Maybe<T> {
     return this.val ? new Maybe(this.val) : other;
-  }
-  get(): T {
-    return this.val;
   }
 }
 

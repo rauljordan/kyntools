@@ -32,5 +32,5 @@ export interface Maybe<T> extends Monad<T> {
   /**
    * Catamorphism
    */
-  cata<Z>(none: () => Z, some: (val: T) => Z): Z;
+  catamorphism<Z>(none: () => Z, some: (val: T) => Z): Z;
 }

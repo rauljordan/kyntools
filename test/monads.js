@@ -8,7 +8,7 @@ import {
 } from 'chai';
 
 import Identity from '../src/identity';
-import { Some } from '../src/maybe';
+import { Maybe, Some, None } from '../src/maybe';
 
 describe('Identity Monad', function() {
 
@@ -37,27 +37,19 @@ describe('Identity Monad', function() {
 describe('Maybe Monad', function() {
 
   it('should flatMap properly', function() {
-    const result = new Some(5).flatMap(val => new Some(val + 3));
-    expect(result.getOrElse('Does Not Work')).to.equal(8);
-  });
-
-  it('should return else if flatMap fails', function() {
-    const result = new Some(5).flatMap(val => new Some(null));
-    expect(result.getOrElse('Does Not Work')).to.equal('Does Not Work');
-  });
-
-  it('should map properly', function() {
-    const result = new Some(5).map(val => val + 3);
+    const result = Maybe.fromNull(5).flatMap(val => Some(val + 3));
     expect(result.getOrElse('Does Not Work')).to.equal(8);
   });
 
   it('should return else if map fails', function() {
-    const result = new Some(5).map(val => null);
+    const result = Maybe.fromNull({ name: 'raul'})
+      .map(o => o.email)
+      .map(o => o.name);
     expect(result.getOrElse('Does Not Work')).to.equal('Does Not Work');
   });
 
   it('should chain maps properly', function() {
-    const result = new Some(5)
+    const result = Maybe.fromNull(5)
       .map(val => val + 2)
       .map(val => val * 2)
       .map(val => [val, val])
