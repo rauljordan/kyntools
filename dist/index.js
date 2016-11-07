@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.None = exports.Some = exports.Maybe = exports.Identity = undefined;
 
 var _identity = require('./identity');
 
@@ -12,9 +13,7 @@ var _maybe = require('./maybe');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  Identity: _identity2.default,
-  Maybe: _maybe.Maybe,
-  Some: _maybe.Some,
-  None: _maybe.None
-};
+exports.Identity = _identity2.default;
+exports.Maybe = _maybe.Maybe;
+exports.Some = _maybe.Some;
+exports.None = _maybe.None;
