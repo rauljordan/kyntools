@@ -78,6 +78,7 @@ describe('Pipe', function() {
       map(x => x * x),
       reduce((x, y) => x + y, 0)
     );
-    expect(transform([1, 2, 3])).to.equal(10);
+    const sum = Maybe.fromNull([1, 2, 3]).flatMap(transform);
+    expect(sum.getOrElse(Infinity)).to.equal(10);
   });
 });
