@@ -9,7 +9,7 @@ import {
 
 import Identity from '../src/identity';
 import { Maybe, Some, None } from '../src/maybe';
-import { curry, path } from '../src';
+import { curry, path, pipe } from '../src';
 
 describe('Identity Monad', function() {
 
@@ -68,5 +68,15 @@ describe('Path and flatMap', function() {
     const obj = { user: { profile: { photo: 'cool url' } } };
     const res = Maybe.fromNull(obj).flatMap(path(['user', 'profile', 'name']));
     expect(res.getOrElse('Not Working')).to.equal('Not Working');
+  });
+});
+
+describe('Pipe', function() {
+  it('pipes properly', function() {
+    const square = x => x * x;
+    const transform = pipe(
+      square
+    );
+    expect([3, 4, 5].map(transform)).to.deep.equal([9, 16, 25]);
   });
 });

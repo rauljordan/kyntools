@@ -2,7 +2,11 @@ import Identity from './identity';
 import { Maybe, Some, None } from './maybe';
 import curry from './helpers/curry';
 import compose from './helpers/compose';
+import pipe from './helpers/pipe';
 import path from './helpers/path';
+import filter from './helpers/filter';
+import map from './helpers/map';
+import reduce from './helpers/reduce';
 
 export {
   Identity,
@@ -11,5 +15,9 @@ export {
   None,
   curry,
   compose,
-  path
+  path,
+  pipe,
+  filter,
+  map,
+  reduce
 };
