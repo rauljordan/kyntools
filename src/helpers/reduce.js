@@ -1,4 +1,6 @@
-export default function reduce(arr, callback, initialVal) {
+import curry from './curry';
+
+export default curry(function reduce(f, initialVal, arr) {
   var acc = (initialVal === undefined) ? undefined : initialVal;
   for (var i = 0; i < arr.length; i++) {
     if (acc !== undefined) {
@@ -9,4 +11,4 @@ export default function reduce(arr, callback, initialVal) {
     }
   }
   return acc;
-};
+});

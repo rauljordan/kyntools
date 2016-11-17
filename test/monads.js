@@ -9,7 +9,7 @@ import {
 
 import Identity from '../src/identity';
 import { Maybe, Some, None } from '../src/maybe';
-import { curry, path, pipe } from '../src';
+import { curry, path, pipe, filter, map, reduce } from '../src';
 
 describe('Identity Monad', function() {
 
@@ -73,10 +73,11 @@ describe('Path and flatMap', function() {
 
 describe('Pipe', function() {
   it('pipes properly', function() {
-    const square = x => x * x;
     const transform = pipe(
-      square
+      filter(x => x % 2 !== 0),
+      map(x => x * x),
+      reduce((x, y) => x + y, 0)
     );
-    expect([3, 4, 5].map(transform)).to.deep.equal([9, 16, 25]);
+    expect(transform([1, 2, 3])).to.equal(10);
   });
 });
