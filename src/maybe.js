@@ -12,10 +12,7 @@ export class Maybe<T> {
   static fromNull(val: T): Maybe<?T> {
     return val ? new Maybe(val) : new Maybe(null);
   }
-  flatMap<Maybe>(f: (t: T) => Monad<Maybe>): ?Monad<Maybe> {
-    return this.val ? f(this.val) : null;
-  }
-  map<U>(f: (t: T) => U): Maybe<?U> {
+  flatMap(f: (t: T) => T): Maybe<?T> {
     return this.val ? new Maybe(f(this.val)) : new Maybe(null);
   }
   ap<U>(f: Maybe<(val: T) => U>): ?Maybe<U> {
