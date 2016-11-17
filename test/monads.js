@@ -9,6 +9,7 @@ import {
 
 import Identity from '../src/identity';
 import { Maybe, Some, None } from '../src/maybe';
+import { curry, path } from '../src';
 
 describe('Identity Monad', function() {
 
@@ -53,4 +54,19 @@ describe('Maybe Monad', function() {
     expect(result.getOrElse('Does Not Work')).to.equal(14);
   });
 
+});
+
+describe('Currying', function() {
+  it('should curry functions properly', function() {
+    const add = curry((x, y) => x + y);
+    expect(add(2)(3)).to.equal(5);
+  });
+});
+
+describe('Path and flatMap', function() {
+  it('get properly from path', function() {
+    const obj = { user: { profile: { photo: 'cool url' } } };
+    const res = Maybe.fromNull(obj).flatMap(path(['user', 'profile', 'name']));
+    expect(res.getOrElse('Not Working')).to.equal('Not Working');
+  });
 });
