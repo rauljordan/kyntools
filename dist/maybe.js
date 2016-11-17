@@ -18,11 +18,6 @@ var Maybe = exports.Maybe = function () {
   _createClass(Maybe, [{
     key: 'flatMap',
     value: function flatMap(f) {
-      return this.val ? f(this.val) : null;
-    }
-  }, {
-    key: 'map',
-    value: function map(f) {
       return this.val ? new Maybe(f(this.val)) : new Maybe(null);
     }
   }, {
